@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Books Display</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Fetch the JSON file
+            $.getJSON("Book.json", function (books) {
+                // Create the table structure
+                let table = `
+                    <table border="1" style="border-collapse: collapse; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Book 1</th>
+                                <th>Book 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>title</strong></td>
+                                <td>${books[0].title}</td>
+                                <td>${books[1].title}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>author</strong></td>
+                                <td>${books[0].author}</td>
+                                <td>${books[1].author}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>publicationYear</strong></td>
+                                <td>${books[0].publicationYear}</td>
+                                <td>${books[1].publicationYear}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>genres</strong></td>
+                                <td>${books[0].genres.join(", ")}</td>
+                                <td>${books[1].genres.join(", ")}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+
+                // Append the table to the body
+                $("body").append(table);
+            }).fail(function () {
+                console.error("Failed to load the JSON file. Check the file path or server setup.");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Books Details</h1>
+</body>
+</html>
